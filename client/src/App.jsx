@@ -4,7 +4,7 @@ import './App.css'
 const API_URL = "http://localhost:3000";
 
 function App() {
-  const [images, seImages] = useState([]);
+  const [images, setImages] = useState([]);
   const imagesRef = useRef([]);
   const postToGet = useRef(1);
 
@@ -12,7 +12,7 @@ function App() {
     e.preventDefault();
     const formData = new FormData();
     formData.append('post[title]', 'Test');
-    for (let i= 0; i< imagesRef.current.files.length; i++){
+    for (let i = 0; i < imagesRef.current.files.length; i++){
       formData.append('post[images][]', imagesRef.current.files[i])
     }
     postData(formData);
@@ -20,7 +20,7 @@ function App() {
 
   const postData = (formData)=>{
     fetch(`${API_URL}/posts`, {
-      method: 'posts',
+      method: 'POST',
       body: formData,
     })
     .then((res)=>res.json())
